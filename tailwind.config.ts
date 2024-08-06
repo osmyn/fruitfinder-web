@@ -1,3 +1,4 @@
+import nextAuth from "next-auth";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -15,6 +16,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
 export default config;
