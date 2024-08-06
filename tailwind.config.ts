@@ -1,3 +1,4 @@
+import nextAuth from "next-auth";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
