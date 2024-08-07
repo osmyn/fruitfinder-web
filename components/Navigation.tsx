@@ -21,11 +21,14 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="flex mb-24 justify-between py-6 px-10 relative mr-7 z-10 items-start">
+    <div
+      className="flex mb-24 justify-between py-6 px-10 relative mr-7 z-10 items-start"
+      data-testid="navbar"
+    >
       <Link href="/" className="text-lg mr-10 2lg:mr-16 ">
         <Image src="/logo.png" alt="Fruit Finder Logo" width="50" height="50" />
       </Link>
-      <div className="lg:hidden">
+      <nav className="lg:hidden" role="navigation" aria-label="Main Menu">
         <button
           className="navbar-burger flex items-center text-blue-600 p-3"
           onClick={handleBurgerClick}
@@ -68,7 +71,7 @@ export default function Navigation() {
             </li>
           </ul>
         </div>
-      </div>
+      </nav>
       <ul className="hidden lg:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         {links.map((link) => (
           <li key={link.href}>
@@ -88,6 +91,6 @@ export default function Navigation() {
           Sign Up
         </LinkButton>
       </div>
-    </nav>
+    </div>
   );
 }
