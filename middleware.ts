@@ -15,3 +15,5 @@ export const config = {
    */
   matcher: ["/((?!api|_next/static|favicon.ico|_next/image|.*\\.png$).*)"],
 };
+
+export { auth as middleware } from "@/auth"; // this will update the session expiry every time its called

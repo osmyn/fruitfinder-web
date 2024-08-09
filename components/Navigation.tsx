@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import LinkButton from "./LinkButton";
+import { SigninButton } from "./auth/SigninButton";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,12 +63,7 @@ export default function Navigation() {
               </li>
             ))}
             <li>
-              <LinkButton
-                href="/signup"
-                className="text-lg mr-200 2xl:mr-16 inline-block text-nowrap"
-              >
-                Sign Up
-              </LinkButton>
+              <SigninButton />
             </li>
           </ul>
         </div>
@@ -87,9 +83,7 @@ export default function Navigation() {
         ))}
       </ul>
       <div className="hidden lg:flex items-center">
-        <LinkButton href="/signup" className="text-lg mr-10 2lg:mr-16">
-          Sign Up
-        </LinkButton>
+        <SigninButton />
       </div>
     </div>
   );

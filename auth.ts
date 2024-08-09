@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
+import Azure_Active_Directory_B2C from "next-auth/providers/azure-ad-b2c";
 import { z } from "zod";
 import type { User } from "@/lib/interfaces";
 
@@ -16,27 +17,13 @@ async function getUser(email: string): Promise<User | undefined> {
 
 // TODO: setup OAuth https://authjs.dev/getting-started/authentication/oauth or Email https://authjs.dev/getting-started/authentication/email
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   providers: [
-    Credentials({
-      async authorize(credentials) {
-        const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
-          .safeParse(credentials);
-
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
-          if (!user) return null;
-          const passwordsMatch = password === "$2b$10$1Q";
-
-          if (passwordsMatch) return user;
-        }
-
-        console.log("Invalid credentials");
-        return null;
-      },
+    Azure_Active_Directory_B2C({
+      clientId: process.env.AUTH_AZURE_AD_B2C_ID,
+      clientSecret: process.env.AUTH_AZURE_AD_B2C_SECRET,
+      // issuer: process.env.AUTH_AZURE_AD_B2C_ISSUER,
     }),
   ],
 });
