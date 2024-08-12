@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import LinkButton from "./LinkButton";
-import { SigninButton } from "./auth/SigninButton";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,9 +60,7 @@ export default function Navigation() {
                 </Link>
               </li>
             ))}
-            <li>
-              <SigninButton />
-            </li>
+            <li></li>
           </ul>
         </div>
       </nav>
@@ -82,9 +78,7 @@ export default function Navigation() {
           </li>
         ))}
       </ul>
-      <div className="hidden lg:flex items-center">
-        <SigninButton />
-      </div>
+      <div className="hidden lg:flex items-center"></div>
     </div>
   );
 }

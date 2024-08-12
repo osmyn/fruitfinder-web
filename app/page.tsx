@@ -1,26 +1,14 @@
-import Image from "next/image";
+"use client";
+import { MsalProvider, useMsal } from "@azure/msal-react";
 import Navigation from "@/components/Navigation";
+import Content from "@/components/Content";
 
 export default function Home() {
+  const { instance } = useMsal();
   return (
-    <>
+    <MsalProvider instance={instance}>
       <Navigation />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1 className="text-4xl font-bold text-center">
-          Welcome to Fruit Finder
-        </h1>
-        <Image
-          src="/logo.png"
-          alt="Fruit Finder logo"
-          width={200}
-          height={200}
-        />
-        <p className="text-center">
-          Discover the freshest local fruit in your area with Fruit Finder. Add
-          and read fruit freshness reviews to see what&apos;s currently in
-          season and ripe near you.
-        </p>
-      </main>
-    </>
+      <Content />
+    </MsalProvider>
   );
 }
