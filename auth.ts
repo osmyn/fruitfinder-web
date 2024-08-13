@@ -1,14 +1,19 @@
 import NextAuth from "next-auth";
 import "next-auth/jwt";
 import AzureB2C from "next-auth/providers/azure-ad-b2c";
-
 import { createStorage } from "unstorage";
-import memoryDriver from "unstorage/drivers/memory";
+import vercelKVDriver from "unstorage/drivers/vercel-kv";
 import { UnstorageAdapter } from "@auth/unstorage-adapter";
 import type { NextAuthConfig } from "next-auth";
 
 const storage = createStorage({
-  driver: memoryDriver(),
+  driver: vercelKVDriver({
+    url: process.env.KV_REST_API_URL, // KV_REST_API_URL
+    token: process.env.KV_REST_API_TOKEN, // KV_REST_API_TOKEN
+    base: "App",
+    env: "KV",
+    ttl: 60, // in seconds
+  }),
 });
 
 const config = {
@@ -28,6 +33,19 @@ const config = {
   ],
   basePath: "/auth",
   debug: process.env.NODE_ENV !== "production",
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnProfile = nextUrl.pathname.startsWith("/profile");
+      if (isOnProfile) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL("/profile", nextUrl));
+      }
+      return true;
+    },
+  },
 } satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);

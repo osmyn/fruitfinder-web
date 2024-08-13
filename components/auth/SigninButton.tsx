@@ -2,14 +2,15 @@
 import { signIn } from "@/auth";
 import Button from "../Button";
 
-export async function SigninButton() {
+export default async function SigninButton() {
   return (
     <form
       action={async () => {
+        "use server";
         await signIn("azure-ad-b2c");
       }}
     >
-      <button type="submit">Sign in</button>
+      <Button type="submit">Sign in</Button>
     </form>
   );
 }

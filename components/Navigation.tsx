@@ -5,7 +5,9 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-export default function Navigation() {
+export default function Navigation({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -78,7 +80,7 @@ export default function Navigation() {
           </li>
         ))}
       </ul>
-      <div className="hidden lg:flex items-center"></div>
+      <div className="hidden lg:flex items-center">{children}</div>
     </div>
   );
 }

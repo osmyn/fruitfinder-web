@@ -1,28 +1,8 @@
 "use client";
 import Image from "next/image";
-import {
-  AuthenticatedTemplate,
-  useMsal,
-  UnauthenticatedTemplate,
-} from "@azure/msal-react";
+import type { Session } from "next-auth";
 
-import Button from "@/components/Button";
-import { loginRequest } from "@/lib/authConfig";
-
-export default function Content() {
-  const { instance } = useMsal();
-
-  const activeAccount = instance.getActiveAccount();
-
-  const handleRedirect = () => {
-    console.log("Button clicked");
-    instance
-      .loginRedirect({
-        ...loginRequest,
-        prompt: "create",
-      })
-      .catch((error) => console.log(error));
-  };
+export default function Content({ session }: { session: Session | null }) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold text-center">
@@ -34,20 +14,34 @@ export default function Content() {
         and read fruit freshness reviews to see what&apos;s currently in season
         and ripe near you.
       </p>
-      <p>
-        You are{" "}
-        <AuthenticatedTemplate>
-          authenticated.
-          {activeAccount && <p>you are active</p>}
-        </AuthenticatedTemplate>
-        <UnauthenticatedTemplate>
-          Not signed in yet!
-          <Button className="signInButton" onClick={handleRedirect}>
-            Sign up
-          </Button>
-        </UnauthenticatedTemplate>
-        .
-      </p>
+      <div className="flex flex-col gap-4 p-4 w-full rounded-md">
+        {session?.user ? (
+          <>
+            <h2 className="text-xl font-bold">Current Session Data</h2>
+            {Object.keys(session.user).length > 3 ? (
+              <p>
+                In this example, the whole session object is passed to the page,
+                including the raw user object. Our recommendation is to{" "}
+                <em>only pass the necessary fields</em> to the page, as the raw
+                user object may contain sensitive information.
+              </p>
+            ) : (
+              <p>
+                In this example, only some fields in the user object is passed
+                to the page to avoid exposing sensitive information.
+              </p>
+            )}
+            <div className="flex flex-col rounded-md">
+              <div className="p-4 font-bold rounded-t-md">Session</div>
+              <pre className="py-6 px-4 whitespace-pre-wrap break-all">
+                {JSON.stringify(session, null, 2)}
+              </pre>
+            </div>
+          </>
+        ) : (
+          <p>No session data</p>
+        )}
+      </div>
     </main>
   );
 }

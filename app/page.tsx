@@ -1,14 +1,17 @@
-"use client";
-import { MsalProvider, useMsal } from "@azure/msal-react";
 import Navigation from "@/components/Navigation";
 import Content from "@/components/Content";
+import SigninOrOutButton from "@/components/auth/SigninButton";
+import { auth } from "@/auth";
 
-export default function Home() {
-  const { instance } = useMsal();
+export default async function Home() {
+  const session = await auth();
   return (
-    <MsalProvider instance={instance}>
-      <Navigation />
-      <Content />
-    </MsalProvider>
+    <>
+      <Navigation>
+        <SigninOrOutButton />{" "}
+      </Navigation>
+
+      <Content session={session} />
+    </>
   );
 }
