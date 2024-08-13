@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Navigation from "@/components/Navigation";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "All Fruits",
@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 const FruitsPage: React.FC = () => {
   return (
     <>
-      <Navigation />
-      <div>
+      <Header />
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <h1>Fruits Page</h1>
-      </div>
+      </main>
     </>
   );
 };

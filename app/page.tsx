@@ -1,17 +1,15 @@
-import Navigation from "@/components/Navigation";
+import Header from "@/components/Header";
 import Content from "@/components/Content";
-import SigninOrOutButton from "@/components/auth/SigninButton";
 import { auth } from "@/auth";
 
 export default async function Home() {
   const session = await auth();
   return (
     <>
-      <Navigation>
-        <SigninOrOutButton />{" "}
-      </Navigation>
-
-      <Content session={session} />
+      <Header />
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <Content session={session} />
+      </main>
     </>
   );
 }

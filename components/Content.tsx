@@ -4,7 +4,7 @@ import type { Session } from "next-auth";
 
 export default function Content({ session }: { session: Session | null }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <>
       <h1 className="text-4xl font-bold text-center">
         Welcome to Fruit Finder
       </h1>
@@ -42,6 +42,6 @@ export default function Content({ session }: { session: Session | null }) {
           <p>No session data</p>
         )}
       </div>
-    </main>
+    </>
   );
 }
