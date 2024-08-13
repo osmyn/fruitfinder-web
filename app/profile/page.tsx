@@ -8,7 +8,9 @@ export const metadata: Metadata = {
 const ProfilePage: React.FC = () => {
   return (
     <>
-      <Navigation />
+      <Navigation>
+        <h3>Hi</h3>
+      </Navigation>
       <div>
         <h1>Profile Page</h1>
       </div>

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import LinkButton from "./LinkButton";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +20,7 @@ export default function Navigation() {
   };
 
   return (
-    <div
-      className="flex mb-24 justify-between py-6 px-10 relative mr-7 z-10 items-start"
-      data-testid="navbar"
-    >
+    <>
       <Link href="/" className="text-lg mr-10 2lg:mr-16 ">
         <Image src="/logo.png" alt="Fruit Finder Logo" width="50" height="50" />
       </Link>
@@ -61,14 +57,7 @@ export default function Navigation() {
                 </Link>
               </li>
             ))}
-            <li>
-              <LinkButton
-                href="/signup"
-                className="text-lg mr-200 2xl:mr-16 inline-block text-nowrap"
-              >
-                Sign Up
-              </LinkButton>
-            </li>
+            <li></li>
           </ul>
         </div>
       </nav>
@@ -86,11 +75,6 @@ export default function Navigation() {
           </li>
         ))}
       </ul>
-      <div className="hidden lg:flex items-center">
-        <LinkButton href="/signup" className="text-lg mr-10 2lg:mr-16">
-          Sign Up
-        </LinkButton>
-      </div>
-    </div>
+    </>
   );
 }
