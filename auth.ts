@@ -12,7 +12,7 @@ const storage = createStorage({
     token: process.env.KV_REST_API_TOKEN, // KV_REST_API_TOKEN
     base: "App",
     env: "KV",
-    ttl: 60, // in seconds
+    ttl: 60 * 60, // in seconds
   }),
 });
 
@@ -45,7 +45,29 @@ const config = {
       }
       return true;
     },
+    jwt({ token, trigger, session, account }) {
+      if (trigger === "update") token.name = session.user.name;
+      return token;
+    },
+    async session({ session, token }) {
+      if (token?.accessToken) {
+        session.sessionToken = token.accessToken;
+      }
+      return session;
+    },
   },
 } satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
+
+declare module "next-auth" {
+  interface Session {
+    accessToken?: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    accessToken?: string;
+  }
+}
