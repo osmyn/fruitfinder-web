@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 export default function Header() {
   return (
     <div
-      className="flex mb-24 justify-between py-6 px-10 relative mr-7 z-10 items-start"
+      className="flex justify-between py-6 px-10 relative mr-7 z-10 items-start"
       data-testid="navbar"
     >
       <Navigation />
