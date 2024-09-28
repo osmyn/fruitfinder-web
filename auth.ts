@@ -5,6 +5,8 @@ import { createStorage } from "unstorage";
 import vercelKVDriver from "unstorage/drivers/vercel-kv";
 import { UnstorageAdapter } from "@auth/unstorage-adapter";
 import type { NextAuthConfig } from "next-auth";
+// import { addUser } from "@/actions";
+// import type { User } from "@/actions";
 
 const storage = createStorage({
   driver: vercelKVDriver({
@@ -34,6 +36,19 @@ const config = {
   basePath: "/auth",
   debug: process.env.NODE_ENV !== "production",
   callbacks: {
+    // async signIn({ account, user, profile, email, credentials }) {
+    //   if ((profile?.newUser as boolean) ?? false) {
+    //     const emails: Array<string> = (profile?.emails as Array<string>) ?? [];
+    //     const newUser: User = {
+    //       name: profile?.name,
+    //       email: emails[0],
+    //       oid: (profile?.oid as string) ?? "",
+    //       zipCode: (profile?.postalCode as string) ?? "",
+    //     };
+    //     await addUser(newUser);
+    //   }
+    //   return true;
+    // },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnProfile = nextUrl.pathname.startsWith("/profile");
@@ -62,7 +77,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth(config);
 
 declare module "next-auth" {
   interface Session {
+    oid?: string;
     accessToken?: string;
+    email?: string;
+    isNewUser?: boolean;
+    zipCode?: string;
   }
 }
 
