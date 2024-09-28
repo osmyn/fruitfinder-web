@@ -4,6 +4,7 @@
       "@/*": ["./*"],
       "@/auth": ["./auth"],
       "@/components/*": ["./components/*"],
+      "@/actions/*": ["./actions/*"],
       "@/lib/*": ["./lib/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
