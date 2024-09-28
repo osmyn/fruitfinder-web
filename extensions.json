@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csdevki",
+    "mquandalle.graphql",
+    "zarifprogrammer.tailwind-snippets",
+    "ms-vscode-remote.remote-wsl",
+    "eamodio.gitlens",
+    "ms-dotnettools.vscode-dotnet-runtime",
+    "mgmcdermott.vscode-language-babel",
+    "ms-dotnettools.csharp",
+    "ms-dotnettools.csdevkit",
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "hashicorp.terraform",
+    "esbenp.prettier-vscode",
+    "sonarsource.sonarlint-vscode",
+    "kalimahapps.tailwind-config-viewer",
+    "bradlc.vscode-tailwindcss",
+    "austenc.tailwind-docs",
+    "firsttris.vscode-jest-runner"
+  ]
+}

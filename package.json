@@ -1,0 +1,12 @@
+{
+  "name": "fruit-finder",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "lerna": "^8.1.8",
+    "pnpm": "^9.8.0"
+  },
+  "scripts": {
+    "bootstrap": "pnpm i"
+  }
+}
