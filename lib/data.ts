@@ -32,7 +32,7 @@ export async function fetchFruitsGraphql() {
   const options: QueryOptions<OperationVariables, any> = {
     query: getFruits,
     variables: {
-      first: 20,
+      first: 2000, // selecting all for now
     },
   };
 

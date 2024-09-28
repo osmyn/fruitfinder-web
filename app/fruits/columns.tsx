@@ -1,8 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
-import { MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,13 +14,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export type Fruit = {
-  id: number;
-  plu: string;
-  category: string;
-  commodity: string;
-  variety: string;
-  size: string;
-  botanicalName: string;
+  Id: number;
+  PLU: string;
+  Category: string;
+  Commodity: string;
+  Variety: string;
+  Size: string;
+  BotanicalName: string;
 };
 
 export const columns: ColumnDef<Fruit>[] = [
@@ -38,9 +37,9 @@ export const columns: ColumnDef<Fruit>[] = [
       );
     },
     cell: ({ row }) => {
-      return <div className="text-right font-medium">{row.original.plu}</div>;
+      return <div className="text-right font-medium">{row.original.PLU}</div>;
     },
-    accessorKey: "plu",
+    accessorKey: "PLU",
   },
   {
     header: ({ column }) => {
@@ -56,10 +55,10 @@ export const columns: ColumnDef<Fruit>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="text-left font-medium">{row.original.category}</div>
+        <div className="text-left font-medium">{row.original.Category}</div>
       );
     },
-    accessorKey: "category",
+    accessorKey: "Category",
   },
   {
     header: ({ column }) => {
@@ -75,10 +74,10 @@ export const columns: ColumnDef<Fruit>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="text-left font-medium">{row.original.commodity}</div>
+        <div className="text-left font-medium">{row.original.Commodity}</div>
       );
     },
-    accessorKey: "commodity",
+    accessorKey: "Commodity",
   },
   {
     header: ({ column }) => {
@@ -94,10 +93,10 @@ export const columns: ColumnDef<Fruit>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="text-left font-medium">{row.original.variety}</div>
+        <div className="text-left font-medium">{row.original.Variety}</div>
       );
     },
-    accessorKey: "variety",
+    accessorKey: "Variety",
   },
   {
     header: ({ column }) => {
@@ -112,9 +111,9 @@ export const columns: ColumnDef<Fruit>[] = [
       );
     },
     cell: ({ row }) => {
-      return <div className="text-left font-medium">{row.original.size}</div>;
+      return <div className="text-left font-medium">{row.original.Size}</div>;
     },
-    accessorKey: "size",
+    accessorKey: "Size",
   },
   {
     header: ({ column }) => {
@@ -131,11 +130,11 @@ export const columns: ColumnDef<Fruit>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-left font-medium">
-          {row.original.botanicalName}
+          {row.original.BotanicalName}
         </div>
       );
     },
-    accessorKey: "botanicalName",
+    accessorKey: "BotanicalName",
   },
   {
     id: "actions",
@@ -153,7 +152,7 @@ export const columns: ColumnDef<Fruit>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(fruit.plu)}
+              onClick={() => navigator.clipboard.writeText(fruit.PLU)}
             >
               Copy fruit PLU
             </DropdownMenuItem>
