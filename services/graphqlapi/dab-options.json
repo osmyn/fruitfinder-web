@@ -1,0 +1,32 @@
+﻿{
+   "ConnectionStringName": "dab-connection-string",
+   "Dacpac": null,
+   "DatabaseType": 3,
+   "ProjectPath": "C:\\code\\FruitFinder\\FruitFinderDab",
+   "Tables": [
+      {
+         "Name": "[dbo].[Accounts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AuditLogs]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Fruits]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ReviewInteractions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Reviews]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Users]",
+         "ObjectType": 0
+      }
+   ]
+}
