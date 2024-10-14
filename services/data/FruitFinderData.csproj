@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FruitFinderDomain\FruitFinderDomain.csproj" />
+    <ProjectReference Include="..\models\FruitFinderDomain.csproj" />
   </ItemGroup>
 
 </Project>
