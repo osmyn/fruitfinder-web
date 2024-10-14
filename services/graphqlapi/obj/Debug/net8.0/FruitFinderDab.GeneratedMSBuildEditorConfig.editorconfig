@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FruitFinderDab
-build_property.ProjectDir = /home/rusty/ghp/fruitfinder-api/FruitFinderDab/
+build_property.ProjectDir = /home/rusty/ghp/fruitfinder-web/services/graphqlapi/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
