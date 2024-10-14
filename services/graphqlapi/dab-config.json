@@ -1,0 +1,355 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v1.2.10/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('dab-connection-string')",
+    "options": {
+      "set-session-context": false
+    }
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/api",
+      "request-body-strict": true
+    },
+    "graphql": {
+      "enabled": true,
+      "path": "/graphql",
+      "allow-introspection": true
+    },
+    "host": {
+      "cors": {
+        "origins": [],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      },
+      "mode": "development"
+    }
+  },
+  "entities": {
+    "Account": {
+      "source": {
+        "object": "[dbo].[Accounts]",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Account",
+          "plural": "Accounts"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "fields": {
+                "exclude": [],
+                "include": [
+                  "Id",
+                  "CompoundId",
+                  "UserId",
+                  "ProviderType",
+                  "ProviderId",
+                  "ProviderAccountId",
+                  "RefreshToken",
+                  "AccessToken",
+                  "AccessTokenExpires",
+                  "CreatedAt",
+                  "UpdatedAt"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "AuditLog": {
+      "source": {
+        "object": "[dbo].[AuditLogs]",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "AuditLog",
+          "plural": "AuditLogs"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "fields": {
+                "exclude": [],
+                "include": [
+                  "Id",
+                  "IPAddress",
+                  "Session",
+                  "Type",
+                  "Endpoint",
+                  "Identifier",
+                  "Message",
+                  "ErrorMessage",
+                  "ErrorStack",
+                  "Request",
+                  "Response",
+                  "AdditionalInfo",
+                  "CreatedAt",
+                  "UpdatedAt"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "Fruit": {
+      "source": {
+        "object": "[dbo].[Fruits]",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Fruit",
+          "plural": "Fruits"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "fields": {
+                "exclude": [],
+                "include": [
+                  "Id",
+                  "PLU",
+                  "Category",
+                  "Commodity",
+                  "Variety",
+                  "Size",
+                  "BotanicalName",
+                  "CreatedAt",
+                  "UpdatedAt"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "relationships": {
+        "Review": {
+          "cardinality": "many",
+          "target.entity": "Review",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        }
+      }
+    },
+    "ReviewInteraction": {
+      "source": {
+        "object": "[dbo].[ReviewInteractions]",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "ReviewInteraction",
+          "plural": "ReviewInteractions"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "fields": {
+                "exclude": [],
+                "include": [
+                  "Id",
+                  "UserId",
+                  "ReviewId",
+                  "Vote",
+                  "Response",
+                  "CreatedAt",
+                  "UpdatedAt"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "relationships": {
+        "Review": {
+          "cardinality": "one",
+          "target.entity": "Review",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        },
+        "User": {
+          "cardinality": "one",
+          "target.entity": "User",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        }
+      }
+    },
+    "Review": {
+      "source": {
+        "object": "[dbo].[Reviews]",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Review",
+          "plural": "Reviews"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "fields": {
+                "exclude": [],
+                "include": [
+                  "Id",
+                  "UserId",
+                  "FruitId",
+                  "Rating",
+                  "ImageUrl",
+                  "ImageStatus",
+                  "ImageRejectedReason",
+                  "Provenance",
+                  "Price",
+                  "Description",
+                  "LocationName",
+                  "LocationZip",
+                  "CreatedAt",
+                  "UpdatedAt"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "relationships": {
+        "ReviewInteraction": {
+          "cardinality": "many",
+          "target.entity": "ReviewInteraction",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        },
+        "Fruit": {
+          "cardinality": "one",
+          "target.entity": "Fruit",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        },
+        "User": {
+          "cardinality": "one",
+          "target.entity": "User",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        }
+      }
+    },
+    "User": {
+      "source": {
+        "object": "[dbo].[Users]",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "User",
+          "plural": "Users"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "fields": {
+                "exclude": [],
+                "include": [
+                  "Id",
+                  "Name",
+                  "Email",
+                  "ImageUrl",
+                  "Zipcode",
+                  "CreatedAt",
+                  "UpdatedAt",
+                  "Oid"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "relationships": {
+        "ReviewInteraction": {
+          "cardinality": "many",
+          "target.entity": "ReviewInteraction",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        },
+        "Review": {
+          "cardinality": "many",
+          "target.entity": "Review",
+          "source.fields": [],
+          "target.fields": [],
+          "linking.source.fields": [],
+          "linking.target.fields": []
+        }
+      }
+    }
+  }
+}
