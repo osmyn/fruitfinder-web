@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FruitFinderDab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91d7b03571533abe1c14d007d1e6513d01eb8d0b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc5421506f47be578bd9d86f5fb026a929ffe892")]
 [assembly: System.Reflection.AssemblyProductAttribute("FruitFinderDab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FruitFinderDab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
