@@ -1,5 +1,5 @@
 import { gql, OperationVariables, QueryOptions } from "@apollo/client";
-import { getClient } from "./graphqlClient";
+import { graphqlClient } from "./graphqlClient";
 import { Fruit } from "@/app/fruits/columns";
 
 const base = process.env.API_BASE_URL;
@@ -11,7 +11,7 @@ export async function fetchFruits(): Promise<Fruit[]> {
 }
 
 export async function fetchFruitsGraphql() {
-  const client = getClient();
+  const client = graphqlClient();
   const getFruits = gql`
     query GetFruits($first: Int) {
       fruits(first: $first, orderBy: { PLU: null }) {

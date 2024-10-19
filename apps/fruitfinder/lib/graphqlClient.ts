@@ -1,14 +1,19 @@
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  NormalizedCacheObject,
+} from "@apollo/client";
 
 const graphqlBase = process.env.GRAPHQL_BASE_URL;
-let graphqlClient: ApolloClient<any> | null = null;
+let client: ApolloClient<NormalizedCacheObject> | null = null;
 
-export const getClient = () => {
-  if (!graphqlClient || typeof window === "undefined") {
-    graphqlClient = new ApolloClient({
+export const graphqlClient = (): ApolloClient<NormalizedCacheObject> => {
+  if (!client || typeof window === "undefined") {
+    client = new ApolloClient({
       link: new HttpLink({ uri: graphqlBase }),
       cache: new InMemoryCache(),
     });
   }
-  return graphqlClient;
+  return client;
 };

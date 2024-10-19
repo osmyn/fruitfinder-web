@@ -5,8 +5,7 @@ import { createStorage } from "unstorage";
 import vercelKVDriver from "unstorage/drivers/vercel-kv";
 import { UnstorageAdapter } from "@auth/unstorage-adapter";
 import type { NextAuthConfig } from "next-auth";
-// import { addUser } from "@/actions";
-// import type { User } from "@/actions";
+import { createUser, type User } from "./actions/action";
 
 const storage = createStorage({
   driver: vercelKVDriver({
@@ -36,19 +35,21 @@ const config = {
   basePath: "/auth",
   debug: process.env.NODE_ENV !== "production",
   callbacks: {
-    // async signIn({ account, user, profile, email, credentials }) {
-    //   if ((profile?.newUser as boolean) ?? false) {
-    //     const emails: Array<string> = (profile?.emails as Array<string>) ?? [];
-    //     const newUser: User = {
-    //       name: profile?.name,
-    //       email: emails[0],
-    //       oid: (profile?.oid as string) ?? "",
-    //       zipCode: (profile?.postalCode as string) ?? "",
-    //     };
-    //     await addUser(newUser);
-    //   }
-    //   return true;
-    // },
+    async signIn({ account, user, profile, email, credentials }) {
+      if ((profile?.newUser as boolean) ?? false) {
+        const emails: Array<string> = (profile?.emails as Array<string>) ?? [];
+        const newUser: User = {
+          name: profile?.name ?? "Unknown",
+          email: emails[0],
+          oid: (profile?.oid as string) ?? "",
+          zipCode: (profile?.postalCode as string) ?? "",
+        };
+        const result = await createUser(newUser);
+        console.log("Create User Result", result);
+        return result.success;
+      }
+      return true;
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnProfile = nextUrl.pathname.startsWith("/profile");
@@ -60,15 +61,14 @@ const config = {
       }
       return true;
     },
-    jwt({ token, trigger, session, account }) {
-      if (trigger === "update") token.name = session.user.name;
-      return token;
-    },
-    async session({ session, token }) {
-      if (token?.accessToken) {
-        session.sessionToken = token.accessToken;
-      }
+    session({ session, token }) {
+      console.log("Session Callback", session, token);
       return session;
+    },
+    async jwt({ token, user, account, profile }) {
+      // This isn't getting called...
+      console.log("JWT Callback", token, user, account, profile);
+      return token;
     },
   },
 } satisfies NextAuthConfig;
